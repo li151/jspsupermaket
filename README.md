@@ -1,0 +1,2 @@
+# jspsupermaket
+用jsp与servlet写了一个超市管理的项目
