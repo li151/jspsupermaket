@@ -1,0 +1,297 @@
+员工信息表
+CREATE　TABLE staff(
+  staid INT NOT NULL PRIMARY KEY, 
+  staname varchar(20),
+  stasex varchar(2),
+  stajg varchar(100),
+  staBirth DATE,
+  staedu varchar(10),
+  stamarry varchar(2),
+  stacard varchar(30),
+  staphone varchar(30),
+  staadress varchar(100),
+  stadesc  varchar(300),
+  stacretime DATE
+);
+comment on table staff  is  '员工信息表';
+comment  on  column  staff.staid   is  '员工编号';
+comment  on  column  staff.staname   is  '员工姓名';
+comment  on  column  staff.stasex   is  '员工性别';
+comment  on  column  staff.stajg   is  '员工籍贯';
+comment  on  column  staff.staBirth   is  '出生年月';
+comment  on  column  staff.staedu   is  '学历';
+comment  on  column  staff.stamarry   is  '是否结婚';
+comment  on  column  staff.stacard   is  '身份证号码';
+comment  on  column  staff.staphone   is  '员工电话';
+comment  on  column  staff.staadress   is  '员工地址';
+comment  on  column  staff.stadesc   is  '员工描述';
+comment  on  column  staff.stacretime   is  '创建时间';
+
+insert into staff(staname,stasex,stajg,staBirth,staedu,
+stamarry,stacard,staphone,staadress,stadesc,stacretime) 
+values('admin','男','安徽',to_date('2015-1-30 12:20:33','YYYY-MM-DD HH24:MI:SS'),
+'研究生','否','341282199501023015','15155896425','安徽阜阳南京路碧桂园',
+'大数据库的把基础卡萨丁彼此间的萨克',to_date('2015-1-30 12:20:33','YYYY-MM-DD HH24:MI:SS'));
+
+
+
+系统登陆用户信息 （这张表和用户信息表相对应里面的用户编号和用户信息表里面的编号相同）
+CREATE TABLE userstaff(
+  userid INT NOT NULL PRIMARY KEY, 
+  username varchar(20),
+  password varchar(50),
+  mdpassword varchar(500),
+  useridentity varchar(50)
+);
+comment on table userstaff  is  '系统登陆用户信息表';
+comment  on  column  userstaff.userid   is  '用户编号';
+comment  on  column  userstaff.username   is  '用户姓名';
+comment  on  column  userstaff.password   is  '用户密码';
+comment  on  column  userstaff.mdpassword   is  '加密后的密码';
+comment  on  column  userstaff.useridentity   is  '用户登陆身份';
+
+insert into userstaff(username,password,mdpassword,useridentity) 
+values('012','123456','asdjkcdskcnjksdcbjsdb','普通用户');
+
+用户权限表
+CREATE TABLE userqx(
+  userid INT,
+  userqxmk varchar(20),
+  userqxzmk varchar(20)
+);
+comment on table userqx  is  '用户权限表';
+comment  on  column  userqx.userid   is  '用户编号';
+comment  on  column  userqx.userqxmk   is  '用户大模块的权限';
+comment  on  column  userqx.userqxzmk   is  '用户小模块的权限';
+
+商品信息表 
+CREATE TABLE march(
+  marid INT NOt NULL PRIMARY KEY, 
+  marclass varchar(30),
+  marname varchar(50),
+  marunit varchar(6),
+  marnowprice varchar(30),
+  marlastprice varchar(30),
+  marsum varchar(50),
+  mardesc varchar(500)
+);
+comment on table march  is  '商品信息表';
+comment  on  column  march.marid   is  '商品编号';
+comment  on  column  march.marclass   is  '商品类别';
+comment  on  column  march.marname   is  '商品名称';
+comment  on  column  march.marunit   is  '商品单位';
+comment  on  column  march.marnowprice   is  '商品当前价格';
+comment  on  column  march.marlastprice   is  '商品进货价格';
+comment  on  column  march.marsum   is  '商品数量';
+comment  on  column  march.mardesc   is  '商品描述';  
+	
+商品采购信息表 (这个和商品信息表相对应)
+CREATE TABLE purchase(
+  purid INT NOt NULL PRIMARY KEY,
+  marid INT NOt NULL,
+  purname varchar(50),
+  puruserid int,
+  purcontact varchar(20),
+  pursum varchar(50),
+  purprice varchar(50),
+  purtime DATE,
+  puraddres varchar(100),
+  purdesc varchar(500),
+  purdate DATE
+);
+comment on table purchase  is  '商品采购信息表';
+comment  on  column  purchase.purid   is  '商品采购信息编号';
+comment  on  column  purchase.marid   is  '商品编号';
+comment  on  column  purchase.purname   is  '商品名称';
+comment  on  column  purchase.puruserid   is  '采购人员编号';
+comment  on  column  purchase.purcontact   is  '供应商联系人';
+comment  on  column  purchase.pursum   is  '采购数量';
+comment  on  column  purchase.purprice   is  '采购时单位商品价格';
+comment  on  column  purchase.purtime   is  '采购时间';
+comment  on  column  purchase.puraddres   is  '采购地点';
+comment  on  column  purchase.purdesc   is  '采购描述';
+comment  on  column  purchase.purdate   is  '采购日期'; 
+	
+商品销售信息
+CREATE TABLE sales(
+  salid INT NOt NULL PRIMARY KEY,
+  salname varchar(50),
+  salunit varchar(6),
+  salsum varchar(50),
+  salprice varchar(50)
+);
+comment on table sales  is  '商品销售信息';
+comment  on  column  sales.salid   is  '商品编号';
+comment  on  column  sales.salname   is  '商品名称';
+comment  on  column  sales.salunit   is  '商品单位';
+comment  on  column  sales.salsum   is  '商品库存数量';
+comment  on  column  sales.salprice   is  '商品当前价格';
+	
+商品类别表  
+CREATE TABLE superclass(
+  supid INT NOt NULL PRIMARY KEY,
+  supname varchar(50)
+); 
+comment on table superclass  is  '商品类别表';
+comment  on  column  superclass.supid   is  '商品类别号';
+comment  on  column  superclass.supname   is  '商品类别名称';
+	
+
+部门信息  
+CREATE TABLE department(
+  depid INT NOt NULL PRIMARY KEY,
+  depname varchar(20)
+); 
+comment on table department  is  '部门信息表';
+comment  on  column  department.depid   is  '部门编号';
+comment  on  column  department.depname   is  '部门名称';
+	
+
+员工考勤信息 
+CREATE TABLE attendance(
+  attid INT NOt NULL PRIMARY KEY,
+  staid INT,
+  atttime DATE,
+  attend varchar(10),
+  attfraction varchar(30),
+  attdesc varchar(500)
+);
+comment on table attendance  is  '员工考勤信息表';
+
+comment  on  column  attendance.attid   is  '员工考勤编号'; 
+comment  on  column  attendance.staid   is  '员工编号'; 
+comment  on  column  attendance.atttime   is  '考勤时间'; 
+comment  on  column  attendance.attend   is  '考勤结果'; 
+comment  on  column  attendance.attfraction   is  '考勤分数'; 
+comment  on  column  attendance.attdesc   is  '考勤描述';   
+	
+员工工资信息  
+CREATE TABLE salary(
+  larid INT NOt NULL PRIMARY KEY,
+  staid  INT,
+  stasalary varchar(50),
+  larjdjj varchar(50),
+  larndjj varchar(50),
+  largljj varchar(50),
+  lartime DATE
+);  
+comment on table salary  is  '员工工资信息';
+
+comment  on  column  salary.larid   is  '员工工资编号';
+comment  on  column  salary.staid   is  '员工编号'; 
+comment  on  column  salary.stasalary   is  '员工基本工资'; 
+comment  on  column  salary.larjdjj   is  '员工季度奖金'; 
+comment  on  column  salary.larndjj   is  '员工年度奖金'; 
+comment  on  column  salary.largljj   is  '员工鼓励奖金'; 
+comment  on  column  salary.lartime   is  '员工发工资时间';  
+	
+商品供应商信息 
+CREATE TABLE supplier(
+  suppid INT NOt NULL PRIMARY KEY,
+  suppname varchar(50),
+  suppaddres varchar(100),
+  suppyb varchar(20),
+  suppproduct varchar(30)
+);   
+comment on table supplier  is  '商品供应商信息';
+
+comment  on  column  supplier.suppid   is  '供应商编号';
+comment  on  column  supplier.suppname   is  '供应商名称';
+comment  on  column  supplier.suppaddres   is  '供应商地址';
+comment  on  column  supplier.suppyb   is  '供应商邮编';
+comment  on  column  supplier.suppproduct   is  '供应商生产产品的名称';
+	
+商品供应商联系人信息（该表和商品供应商信息对应是一对多的关系，其中供应商编号和供应商信息里面的供应商编号一致）
+CREATE TABLE gyslxr(
+  gysid INT NOt NULL PRIMARY KEY,
+  suppid INT,
+  gysname varchar(20),
+  gyssex varchar(2),
+  gysposition varchar(20),
+  gyscompany varchar(50),
+  gysah varchar(100),
+  gysphone varchar(50),
+  gysdesc varchar(500)
+);
+comment on table gyslxr  is  '商品供应商信息';
+
+comment  on  column  gyslxr.gysid   is  '供应商联系人编号';
+comment  on  column  gyslxr.suppid   is  '供应商编号';
+comment  on  column  gyslxr.gysname   is  '联系人姓名';
+comment  on  column  gyslxr.gyssex   is  '联系人性别';     
+comment  on  column  gyslxr.gysposition   is  '联系人职位';
+comment  on  column  gyslxr.gyscompany   is  '联系人公司名称';
+comment  on  column  gyslxr.gysah   is  '联系人爱好';
+comment  on  column  gyslxr.gysphone   is  '联系人电话';
+comment  on  column  gyslxr.gysdesc   is  '联系人描述';  
+
+
+
+
+店铺表
+CREATE TABLE shop(
+  shoid INT NOt NULL PRIMARY KEY,
+  shoclass varchar(30),
+  shoname varchar(50)
+);
+comment on table shop  is  '店铺表';
+comment  on  column  shop.shoid   is  '店铺编号';
+comment  on  column  shop.shoclass   is  '店铺类别';
+comment  on  column  shop.shoname   is  '店铺名称';
+  
+	
+//连接数据库驱动
+		conn = jdbcUnitl.getConnection();
+		
+		
+		
+		//关闭资源
+		jdbcUnitl.close(conn, ps, rs);	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
